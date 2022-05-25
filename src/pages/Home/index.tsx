@@ -35,17 +35,14 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     async function loadProducts() {
-      api.get<Product[]>("products").then((response) => {
-        //console.log("response.data", response.data);
-        const productsFormatted = response.data.map((product) => {
-          //console.log("product", product);
+      await api.get<Product[]>("products").then((response) => {
+        const ProductFormatted = response.data.map((product) => {
           return {
             ...product,
-            priceFormatted: formatPrice(product.price).toString(),
+            priceFormatted: formatPrice(product.price),
           };
         });
-        //console.log("productsFormatted", productsFormatted);
-        setProducts(productsFormatted);
+        setProducts(ProductFormatted);
       });
     }
     loadProducts();
